@@ -1,0 +1,23 @@
+.note {
+}
+.hide {
+  display: none;
+}
+.success {
+  border: 4px solid green;
+  height: 45px;
+  border-radius: 4px;
+
+  color: rgb(2, 66, 2);
+  font-size: 1.5em;
+  background-color: grey;
+}
+.fail {
+  border: 4px solid rgb(92, 1, 1);
+  height: 45px;
+  border-radius: 4px;
+
+  color: rgb(92, 1, 1);
+  font-size: 1.5em;
+  background-color: grey;
+}
