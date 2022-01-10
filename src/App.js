@@ -111,17 +111,17 @@ const App = () => {
       id: blog.id,
     };
     const result = await blogService.edit(newObject);
-    // const indexOf = blogs.findIndex((ele) => ele.id === blog.id);
-    // const newBlogs = blogs;
-    // newBlogs[indexOf] = result;
 
     const newBlogs = blogs.filter((blogEle) => blogEle.id !== blog.id);
     newBlogs.push(result);
     setBlogs(newBlogs);
   };
 
-  const compare = (a, b) => {
-    return b.likes - a.likes;
+  const removeBlog = async (blog) => {
+    alert(`Remove blog ${blog.title} by ${blog.author}`);
+    const result = await blogService.remove(blog.id);
+    const newBlogs = blogs.filter((ele) => ele.id !== blog.id);
+    setBlogs(newBlogs);
   };
 
   return (
@@ -134,7 +134,12 @@ const App = () => {
           {blogs
             .sort((a, b) => b.likes - a.likes)
             .map((blog) => (
-              <Blog key={blog.id} blog={blog} updateLike={updateLike} />
+              <Blog
+                key={blog.id}
+                blog={blog}
+                updateLike={updateLike}
+                removeBlog={removeBlog}
+              />
             ))}
         </div>
       )}

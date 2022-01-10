@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-const Blog = ({ blog, updateLike }) => {
+const Blog = ({ blog, updateLike, removeBlog }) => {
   const [visible, setVisible] = useState(false);
   const showWhenVisible = { display: visible ? '' : 'none' };
   const toggleVisibility = () => {
@@ -35,6 +35,15 @@ const Blog = ({ blog, updateLike }) => {
             </button>
           </div>
           <div>{blog.user.name}</div>
+          <div>
+            <button
+              onClick={() => {
+                removeBlog(blog);
+              }}
+            >
+              Remove
+            </button>
+          </div>
         </div>
       </div>
     );
