@@ -7,6 +7,7 @@ import Togglable from './components/Togglable';
 import CreateForm from './components/CreateForm';
 import LoginForm from './components/LoginForm';
 import './index.css';
+
 const App = () => {
   const [blogs, setBlogs] = useState([]);
 
@@ -100,6 +101,29 @@ const App = () => {
     );
   };
 
+  const updateLike = async (blog) => {
+    const newObject = {
+      user: blog.user.id,
+      likes: blog.likes,
+      author: blog.author,
+      title: blog.title,
+      url: blog.url,
+      id: blog.id,
+    };
+    const result = await blogService.edit(newObject);
+    // const indexOf = blogs.findIndex((ele) => ele.id === blog.id);
+    // const newBlogs = blogs;
+    // newBlogs[indexOf] = result;
+
+    const newBlogs = blogs.filter((blogEle) => blogEle.id !== blog.id);
+    newBlogs.push(result);
+    setBlogs(newBlogs);
+  };
+
+  const compare = (a, b) => {
+    return b.likes - a.likes;
+  };
+
   return (
     <div>
       {user === null ? (
@@ -107,9 +131,11 @@ const App = () => {
       ) : (
         <div>
           {createBlogForm()}
-          {blogs.map((blog) => (
-            <Blog key={blog.id} blog={blog} />
-          ))}
+          {blogs
+            .sort((a, b) => b.likes - a.likes)
+            .map((blog) => (
+              <Blog key={blog.id} blog={blog} updateLike={updateLike} />
+            ))}
         </div>
       )}
     </div>
