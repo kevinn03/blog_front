@@ -53,7 +53,7 @@ const App = () => {
     }
   };
 
-  const handleLogout = (event) => {
+  const handleLogout = () => {
     window.localStorage.removeItem('loggedBlogappUser');
     setUser(null);
     blogService.setToken(null);
@@ -119,7 +119,7 @@ const App = () => {
 
   const removeBlog = async (blog) => {
     alert(`Remove blog ${blog.title} by ${blog.author}`);
-    const result = await blogService.remove(blog.id);
+    await blogService.remove(blog.id);
     const newBlogs = blogs.filter((ele) => ele.id !== blog.id);
     setBlogs(newBlogs);
   };
