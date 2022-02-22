@@ -118,10 +118,14 @@ const App = () => {
   };
 
   const removeBlog = async (blog) => {
-    alert(`Remove blog ${blog.title} by ${blog.author}`);
-    await blogService.remove(blog.id);
-    const newBlogs = blogs.filter((ele) => ele.id !== blog.id);
-    setBlogs(newBlogs);
+    try {
+      alert(`Remove blog ${blog.title} by ${blog.author}`);
+      await blogService.remove(blog.id);
+      const newBlogs = blogs.filter((ele) => ele.id !== blog.id);
+      setBlogs(newBlogs);
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   return (
